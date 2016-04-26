@@ -9,53 +9,53 @@
 ##Complete Steps:
 </a>
 
-* **Upgrade/Update to Java 8**
+1 **Upgrade/Update to Java 8**
 	* Use jenkins-alfred-base/recipes/java8.rb for help
 	* Change chef to alter the stash bash profile script, 'set-java-home.sh' to correctly set the home for Java 8.
 	* Set the java home manually (if above step not complete)
 	
-* **Do a complete backup of the current server**
+2 **Do a complete backup of the current server**
 
-* **Download bitbucket server 4.5.2**
+3 **Download bitbucket server 4.5.2**
 	* ```wget https://www.atlassian.com/software/bitbucket/download```
 	* ```mv tarball to /mnt/stash/atlassian```
 	* chown stash:stash atlassian-bitbucket tar file
 	
-* **Stop chef-client**
+4 **Stop chef-client**
 	* ```service chef-client stop```
 	
-* **Become the stash user**
+5 **Become the stash user**
 	* ```su stash```
 	
-* **Untar the tar ball in /mnt/stash/atlassian**
+6 **Untar the tar ball in /mnt/stash/atlassian**
 
-* **stop the current stash 3.11.6**
+7 **stop the current stash 3.11.6**
 	* ```service stash stop```
 	
-* **Change the /etc/init.d/stash file**
+8 **Change the /etc/init.d/stash file**
 	* Change STASH_INSTALLDIR
 	* Replace instances of Stash with bitbucket
 		* ```:%s/Stash/bitbucket/```
 		
-* **Check files in /mnt/atlassian/application-data/stash/shared**
+9 **Check files in /mnt/atlassian/application-data/stash/shared**
 	* Find server.xml
 		* If not there, re-run chef-client to generate server.xml
 			* Make sure to re-change /etc/init.d/stash if you re-run chef-client
 		* Change all instances of stash in names/filepaths to bitbucket
 			* only necessary because updating from stash to bitbucket
 			
-* **Check setenv.sh, see if it's different/been changed on the main server**
+10 **Check setenv.sh, see if it's different/been changed on the main server**
 	* If so, copy the changes
 	
-* **Double check to make sure the old stash is stopped**
+11 **Double check to make sure the old stash is stopped**
 	* run stop-stash.sh in old stash folder if needed
 	
-* **Start the new bitbucket server**
+12 **Start the new bitbucket server**
 	* ```service bitbucket start```
 	
-* **Check everything is running fine and it displays the correct version number**
+13 **Check everything is running fine and it displays the correct version number**
 
-* **Finally, update all plug-ins and check they are working in gui**
+14 **Finally, update all plug-ins and check they are working in gui**
 
 
 
